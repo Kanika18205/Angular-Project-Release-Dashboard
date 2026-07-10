@@ -77,6 +77,7 @@ namespace ReleaseDashboard.Controllers
         [HttpPost("login")]
         public IActionResult Login (User request)
         {
+        try{
             var user = _context.Users.FirstOrDefault(x =>
                 x.Email == request.Email);
 
@@ -112,6 +113,13 @@ namespace ReleaseDashboard.Controllers
                     role = user.Role
                 });
             }
+} catch (Exception ex)
+    {
+        Console.WriteLine(ex);   // This will appear in Render logs
+
+        return StatusCode(500, ex.ToString());
+    }
+            
 
         }
     }
