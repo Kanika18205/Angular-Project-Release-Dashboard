@@ -84,6 +84,7 @@ builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
 var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
 builder.WebHost.UseUrls($"http://*:{port}");
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -107,5 +108,11 @@ app.MapHub<NotificationHub>("/notificationHub");
 app.MapControllers();
 
 app.MapFallbackToFile("index.html");
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
