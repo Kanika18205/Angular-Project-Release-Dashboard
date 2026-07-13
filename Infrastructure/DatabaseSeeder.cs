@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ReleaseDashboard.Data;
+using Microsoft.AspNetCore.Identity;
 using ReleaseDashboard.Models;
 
 namespace ReleaseDashboard.Infrastructure;
