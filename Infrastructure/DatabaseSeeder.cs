@@ -12,15 +12,19 @@ public static class DatabaseSeeder
         if (await context.Users.AnyAsync(u => u.Email == "admin@example.com"))
             return;
 
-        var admin = new User
+       var admin = new User
         {
             Username = "admin",
             Email = "admin@example.com",
-            Password = BCrypt.Net.BCrypt.HashPassword("Admin@123"),
             Role = "Admin"
         };
 
+        var hasher = new PasswordHasher<User>();
+        
+        admin.Password = hasher.HashPassword(admin, "Admin@123");
+        
         context.Users.Add(admin);
+        
         await context.SaveChangesAsync();
     }
 }
