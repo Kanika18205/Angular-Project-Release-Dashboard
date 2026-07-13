@@ -1,4 +1,3 @@
-using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using ReleaseDashboard.Data;
 using ReleaseDashboard.Models;
